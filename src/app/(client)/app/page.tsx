@@ -8,6 +8,9 @@ export default function ClientDashboard() {
         <Link href="/app/connect" className="underline">
           Conectar WhatsApp
         </Link>
+        <Link href="/app/crm" className="underline">
+          CRM
+        </Link>
       </nav>
     </main>
   );
