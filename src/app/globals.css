@@ -1,26 +1,76 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #09090b;
+  --bg-elevated: #121215;
+  --bg-elevated-2: #17171b;
+  --border: rgba(255, 255, 255, 0.07);
+  --border-hover: rgba(10, 126, 140, 0.5);
+  --text-primary: #f2f2f0;
+  --text-dim: #8b8b90;
+  --text-faint: #55555c;
+  --accent: #0a7e8c;
+  --accent-bright: #0fb8cc;
+  --amber: #d4a24c;
+  --success: #5fd4a8;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-bg: var(--bg);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-bg-elevated-2: var(--bg-elevated-2);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+  --color-text-primary: var(--text-primary);
+  --color-text-dim: var(--text-dim);
+  --color-text-faint: var(--text-faint);
+  --color-accent: var(--accent);
+  --color-accent-bright: var(--accent-bright);
+  --color-amber: var(--amber);
+  --color-success: var(--success);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-display: "Clash Display", var(--font-outfit), sans-serif;
+  --font-body: var(--font-outfit), sans-serif;
+  --font-mono-data: var(--font-jetbrains-mono), monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+}
+
+@keyframes pulse-flow {
+  to {
+    stroke-dashoffset: -200;
+  }
+}
+
+.pulse-line-path {
+  stroke-dasharray: 6 5;
+  animation: pulse-flow 3s linear infinite;
+}
+
+@keyframes count-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-line-path {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import Header from "@/components/layout/Header";
 
 export default async function ClientLayout({ children }: { children: React.ReactNode }) {
   const supabase = await createClient();
@@ -19,5 +20,10 @@ export default async function ClientLayout({ children }: { children: React.React
   // não pelo role -- um upflu_admin também pode ter client_id (uso interno).
   if (!profile?.client_id) redirect("/admin");
 
-  return <div className="flex min-h-screen flex-1 flex-col">{children}</div>;
+  return (
+    <div className="flex min-h-screen flex-1 flex-col bg-bg">
+      <Header userEmail={user.email} />
+      {children}
+    </div>
+  );
 }
