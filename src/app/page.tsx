@@ -13,9 +13,11 @@ export default async function Home() {
 
   const { data: profile } = await supabase
     .from("profiles")
-    .select("role")
+    .select("role, client_id")
     .eq("id", user.id)
     .single();
 
-  redirect(profile?.role === "upflu_admin" ? "/admin" : "/app");
+  // Quem tem client_id usa o painel do cliente por padrão, mesmo sendo upflu_admin
+  // (caso de uso interno: a própria Upflu operando como cliente da plataforma).
+  redirect(profile?.client_id ? "/app" : "/admin");
 }
